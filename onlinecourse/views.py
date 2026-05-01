@@ -112,7 +112,7 @@ def submit(request, course_id):
     enrollment = Enrollment.objects.get(user=user, course=course)
 
     # New Submission object referring to enrollement
-    submission = Submission.objects.create(enrollement=enrollment)
+    submission = Submission.objects.create(enrollment=enrollment)
 
     #Collect the selected choices from exam form
     choices = extract_answers(request)
@@ -158,7 +158,7 @@ def show_exam_result(request, course_id, submission_id):
             total_score += question.grade # Add to grade if correct
 
     context['course'] = course
-    context['total_score'] = total_score
+    context['grade'] = total_score
     context['choices'] = choices
 
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
